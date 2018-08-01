@@ -78,7 +78,7 @@ else:
             counter = 0
             avg = 0
             #imlist = []
-            file = open("Count_per_sec_Vid8.txt", "w")
+            file = open("Count_per_sec_Vid12.txt", "w")
             while success: 
                 counter +=1
                 img = np.copy(im)
