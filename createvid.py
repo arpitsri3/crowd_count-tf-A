@@ -36,19 +36,24 @@ fps = np.int32(fps)
 print("Frames Per Second:",fps,"\n")
 
 counter = 0
-tm = 1
+tm = 0
+counts = []
 
 out = open(countFile, "r")
-
+for line in out: 
+    counts.append(line)
 
 def pipeline(img):
     global counter, tm
     counter += 1
-    txt = out.readline(tm)
+    if tm>=len(counts):
+        tm = len(counts)-1
+    txt ='Crowd Count:'+ counts[tm]
+    #print(txt)
     if counter <= fps:
-        cv2.putText(img, txt, (0, 0), font, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+        cv2.putText(img, txt[:-1], (90, 90), font, 2.0, (0, 0, 0), 2, cv2.LINE_AA)
     else:
-        cv2.putText(img, txt, (0, 0), font, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+        cv2.putText(img, txt[:-1], (90, 90), font, 2.0, (0, 0, 0), 2, cv2.LINE_AA)
         counter = 0
         tm += 1
     return img
